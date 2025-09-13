@@ -25,10 +25,10 @@ export default function MovieDetail() {
 
   if (loading) return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6">
-      <div className="flex items-center justify-center py-12">
+      <div className="flex items-center justify-center py-8 sm:py-12">
         <div className="flex items-center gap-3">
-          <div className="w-6 h-6 border-2 border-indigo-600 border-t-transparent rounded-full animate-spin"></div>
-          <span className="text-gray-600 dark:text-gray-300">Loading...</span>
+          <div className="w-5 h-5 sm:w-6 sm:h-6 border-2 border-indigo-600 border-t-transparent rounded-full animate-spin"></div>
+          <span className="text-sm sm:text-base text-gray-600">Loading...</span>
         </div>
       </div>
     </div>
@@ -36,9 +36,9 @@ export default function MovieDetail() {
   
   if (!data) return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6">
-      <div className="text-center py-12">
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2">Not Found</h2>
-        <p className="text-gray-600 dark:text-gray-400">The movie or TV show you're looking for doesn't exist.</p>
+      <div className="text-center py-8 sm:py-12">
+        <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">Not Found</h2>
+        <p className="text-gray-600">The movie or TV show you're looking for doesn't exist.</p>
       </div>
     </div>
   )
@@ -59,24 +59,24 @@ export default function MovieDetail() {
     <div className="min-h-screen">
       {/* Hero Section with Backdrop */}
       {backdrop && (
-        <div className="relative h-96 bg-cover bg-center" style={{ backgroundImage: `url(${backdrop})` }}>
+        <div className="relative h-64 sm:h-80 lg:h-96 bg-cover bg-center" style={{ backgroundImage: `url(${backdrop})` }}>
           <div className="absolute inset-0 bg-black/50"></div>
           <div className="absolute inset-0 flex items-center">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12">
-              <div className="flex flex-col md:flex-row gap-8 items-start">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+              <div className="flex flex-col sm:flex-row gap-4 sm:gap-8 items-start">
                 {poster && (
-                  <img src={poster} alt={title} className="w-48 h-72 rounded-lg shadow-2xl" />
+                  <img src={poster} alt={title} className="w-32 h-48 sm:w-40 sm:h-60 lg:w-48 lg:h-72 rounded-lg shadow-2xl mx-auto sm:mx-0" />
                 )}
-                <div className="text-white">
-                  <h1 className="text-4xl font-bold mb-4">{title}</h1>
-                  <div className="flex items-center gap-4 text-lg mb-4">
+                <div className="text-white text-center sm:text-left">
+                  <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 sm:mb-4">{title}</h1>
+                  <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 text-sm sm:text-lg mb-3 sm:mb-4">
                     <span>{date}</span>
                     <span className="text-yellow-400">⭐ {rating?.toFixed?.(1) ?? rating}</span>
                     {runtime && <span>{Math.floor(runtime / 60)}h {runtime % 60}m</span>}
                   </div>
-                  {genres && <p className="text-gray-300 mb-4">{genres}</p>}
+                  {genres && <p className="text-gray-300 mb-3 sm:mb-4 text-sm sm:text-base">{genres}</p>}
                   {data.overview && (
-                    <p className="text-lg leading-relaxed max-w-2xl">{data.overview}</p>
+                    <p className="text-sm sm:text-base lg:text-lg leading-relaxed max-w-2xl">{data.overview}</p>
                   )}
                 </div>
               </div>
@@ -89,24 +89,24 @@ export default function MovieDetail() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
         {/* Cast Section */}
         {cast.length > 0 && (
-          <div className="mb-12">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">Cast</h2>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+          <div className="mb-8 sm:mb-12">
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6">Cast</h2>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4">
               {cast.map((person) => (
-                <div key={person.id} className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm">
+                <div key={person.id} className="bg-white rounded-lg p-3 sm:p-4 shadow-sm">
                   {person.profile_path ? (
                     <img 
                       src={imageBaseUrl(person.profile_path, 'w185')} 
                       alt={person.name}
-                      className="w-full h-32 object-cover rounded-lg mb-3"
+                      className="w-full h-24 sm:h-32 object-cover rounded-lg mb-2 sm:mb-3"
                     />
                   ) : (
-                    <div className="w-full h-32 bg-gray-200 dark:bg-gray-700 rounded-lg mb-3 flex items-center justify-center">
-                      <span className="text-gray-500 text-sm">No Image</span>
+                    <div className="w-full h-24 sm:h-32 bg-gray-200 rounded-lg mb-2 sm:mb-3 flex items-center justify-center">
+                      <span className="text-gray-500 text-xs sm:text-sm">No Image</span>
                     </div>
                   )}
-                  <h3 className="font-semibold text-gray-900 dark:text-gray-100 text-sm">{person.name}</h3>
-                  <p className="text-gray-600 dark:text-gray-400 text-xs">{person.character}</p>
+                  <h3 className="font-semibold text-gray-900 text-xs sm:text-sm">{person.name}</h3>
+                  <p className="text-gray-600 text-xs">{person.character}</p>
                 </div>
               ))}
             </div>
@@ -115,22 +115,22 @@ export default function MovieDetail() {
 
         {/* Videos Section */}
         {videos.length > 0 && (
-          <div className="mb-12">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">Videos</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="mb-8 sm:mb-12">
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6">Videos</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               {videos.map((video) => (
-                <div key={video.key} className="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-sm">
+                <div key={video.key} className="bg-white rounded-lg overflow-hidden shadow-sm">
                   <iframe
                     src={`https://www.youtube.com/embed/${video.key}`}
                     title={video.name}
-                    className="w-full h-48"
+                    className="w-full h-40 sm:h-48"
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
                   ></iframe>
-                  <div className="p-4">
-                    <h3 className="font-semibold text-gray-900 dark:text-gray-100 text-sm">{video.name}</h3>
-                    <p className="text-gray-600 dark:text-gray-400 text-xs mt-1">{video.type}</p>
+                  <div className="p-3 sm:p-4">
+                    <h3 className="font-semibold text-gray-900 text-xs sm:text-sm">{video.name}</h3>
+                    <p className="text-gray-600 text-xs mt-1">{video.type}</p>
                   </div>
                 </div>
               ))}
@@ -140,8 +140,8 @@ export default function MovieDetail() {
 
         {/* Similar Movies/TV Shows */}
         {similar.length > 0 && (
-          <div className="mb-12">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">
+          <div className="mb-8 sm:mb-12">
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6">
               Similar {type === 'tv' ? 'TV Shows' : 'Movies'}
             </h2>
             <MovieList items={similar} />
@@ -149,40 +149,40 @@ export default function MovieDetail() {
         )}
 
         {/* Additional Details */}
-        <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm">
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">Additional Details</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="bg-white rounded-xl p-4 sm:p-6 shadow-sm">
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6">Additional Details</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
             <div>
-              <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-3">Production Details</h3>
+              <h3 className="font-semibold text-gray-900 mb-3">Production Details</h3>
               <div className="space-y-2 text-sm">
                 {status && (
                   <div className="flex justify-between">
-                    <span className="text-gray-600 dark:text-gray-400">Status:</span>
-                    <span className="text-gray-900 dark:text-gray-100">{status}</span>
+                    <span className="text-gray-600">Status:</span>
+                    <span className="text-gray-900">{status}</span>
                   </div>
                 )}
                 {data.original_language && (
                   <div className="flex justify-between">
-                    <span className="text-gray-600 dark:text-gray-400">Original Language:</span>
-                    <span className="text-gray-900 dark:text-gray-100">{data.original_language.toUpperCase()}</span>
+                    <span className="text-gray-600">Original Language:</span>
+                    <span className="text-gray-900">{data.original_language.toUpperCase()}</span>
                   </div>
                 )}
                 {data.budget && data.budget > 0 && (
                   <div className="flex justify-between">
-                    <span className="text-gray-600 dark:text-gray-400">Budget:</span>
-                    <span className="text-gray-900 dark:text-gray-100">${(data.budget / 1000000).toFixed(1)}M</span>
+                    <span className="text-gray-600">Budget:</span>
+                    <span className="text-gray-900">${(data.budget / 1000000).toFixed(1)}M</span>
                   </div>
                 )}
                 {data.revenue && data.revenue > 0 && (
                   <div className="flex justify-between">
-                    <span className="text-gray-600 dark:text-gray-400">Revenue:</span>
-                    <span className="text-gray-900 dark:text-gray-100">${(data.revenue / 1000000).toFixed(1)}M</span>
+                    <span className="text-gray-600">Revenue:</span>
+                    <span className="text-gray-900">${(data.revenue / 1000000).toFixed(1)}M</span>
                   </div>
                 )}
               </div>
             </div>
             <div>
-              <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-3">Production Companies</h3>
+              <h3 className="font-semibold text-gray-900 mb-3">Production Companies</h3>
               <div className="space-y-2 text-sm">
                 {data.production_companies?.map((company) => (
                   <div key={company.id} className="flex items-center gap-2">
@@ -190,12 +190,12 @@ export default function MovieDetail() {
                       <img 
                         src={imageBaseUrl(company.logo_path, 'w92')} 
                         alt={company.name}
-                        className="w-8 h-8 object-contain"
+                        className="w-6 h-6 sm:w-8 sm:h-8 object-contain"
                       />
                     ) : (
-                      <div className="w-8 h-8 bg-gray-200 dark:bg-gray-700 rounded"></div>
+                      <div className="w-6 h-6 sm:w-8 sm:h-8 bg-gray-200 rounded"></div>
                     )}
-                    <span className="text-gray-900 dark:text-gray-100">{company.name}</span>
+                    <span className="text-gray-900 text-xs sm:text-sm">{company.name}</span>
                   </div>
                 ))}
               </div>
